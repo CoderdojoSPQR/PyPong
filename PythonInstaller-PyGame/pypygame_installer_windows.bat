@@ -14,5 +14,3 @@ python -m pip install installers/pygame-2.6.1-cp310-cp310-win_amd64.whl --no-ind
 echo Installazione completata.
 
 PAUSE
-
-installers\pygame-2.6.1-cp310-cp310-win_amd64.whl"
