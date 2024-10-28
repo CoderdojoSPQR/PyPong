@@ -16,8 +16,8 @@ dx_pallina, dy_pallina = 5, 5
 grandezza_pallina = 10
 
 paddle1_y, paddle2_y = A_SCHERMO // 2, A_SCHERMO // 2
-PADDLE_LARGHEZZA, PADDLE_ALTEZZA = 10, 100
-VELOCITA_PADDLE = 7
+paddle_larghezza, paddle_altezza = 10, 100
+velocita_paddle = 7
 
 # Loop principale del gioco
 while True:
@@ -29,13 +29,13 @@ while True:
     # Controlli paddle
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w] and paddle1_y > 0:
-        paddle1_y -= VELOCITA_PADDLE
-    if keys[pygame.K_s] and paddle1_y < A_SCHERMO - PADDLE_ALTEZZA:
-        paddle1_y += VELOCITA_PADDLE
+        paddle1_y -= velocita_paddle
+    if keys[pygame.K_s] and paddle1_y < A_SCHERMO - paddle_altezza:
+        paddle1_y += velocita_paddle
     if keys[pygame.K_UP] and paddle2_y > 0:
-        paddle2_y -= VELOCITA_PADDLE
-    if keys[pygame.K_DOWN] and paddle2_y < A_SCHERMO - PADDLE_ALTEZZA:
-        paddle2_y += VELOCITA_PADDLE
+        paddle2_y -= velocita_paddle
+    if keys[pygame.K_DOWN] and paddle2_y < A_SCHERMO - paddle_altezza:
+        paddle2_y += velocita_paddle
 
     # Movimento della pallina
     x_pallina += dx_pallina
@@ -45,21 +45,21 @@ while True:
     # =======
     # Collisione con il bordo superiore e inferiore
     if y_pallina <= grandezza_pallina or y_pallina >= A_SCHERMO - grandezza_pallina:
-            dy_pallina *= -1
+        dy_pallina *= -1
 
 
     # Collisione con il paddle sinistro
-    if (x_pallina - grandezza_pallina <= PADDLE_LARGHEZZA and
-        paddle1_y < y_pallina < paddle1_y + PADDLE_ALTEZZA):
+    if (x_pallina - grandezza_pallina <= paddle_larghezza and
+        paddle1_y < y_pallina < paddle1_y + paddle_altezza):
         dx_pallina *= -1
-        x_pallina = PADDLE_LARGHEZZA + grandezza_pallina 
+        x_pallina = paddle_larghezza + grandezza_pallina 
 
 
     # Collisione con il paddle destro
-    if (x_pallina + grandezza_pallina >= L_SCHERMO - PADDLE_LARGHEZZA and
-    paddle2_y < y_pallina < paddle2_y + PADDLE_ALTEZZA):
+    if (x_pallina + grandezza_pallina >= L_SCHERMO - paddle_larghezza and
+    paddle2_y < y_pallina < paddle2_y + paddle_altezza):
         dx_pallina *= -1
-        x_pallina = L_SCHERMO - PADDLE_LARGHEZZA - grandezza_pallina 
+        x_pallina = L_SCHERMO - paddle_larghezza - grandezza_pallina 
 
     # Reset della pallina se va oltre i bordi
     if x_pallina < 0 or x_pallina > L_SCHERMO:
@@ -71,7 +71,7 @@ while True:
     # Disegno di tutto 
     schermo.fill((0, 0, 0))
     pygame.draw.circle(schermo, BIANCO, (x_pallina, y_pallina), grandezza_pallina)
-    pygame.draw.rect(schermo, BIANCO, (0, paddle1_y, PADDLE_LARGHEZZA, PADDLE_ALTEZZA))
-    pygame.draw.rect(schermo, BIANCO, (L_SCHERMO - PADDLE_LARGHEZZA, paddle2_y, PADDLE_LARGHEZZA, PADDLE_ALTEZZA))
+    pygame.draw.rect(schermo, BIANCO, (0, paddle1_y, paddle_larghezza, paddle_altezza))
+    pygame.draw.rect(schermo, BIANCO, (L_SCHERMO - paddle_larghezza, paddle2_y, paddle_larghezza, paddle_altezza))
     pygame.display.update()
     pygame.time.delay(30)

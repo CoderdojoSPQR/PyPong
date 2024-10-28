@@ -114,7 +114,7 @@ Il codice di riferimento è in `pong_3_avanzata_con_punteggio.py`.
 
 - I paddle possono essere resi **piu lunghi o piu corti**, basta cambiare i valori delle coordinate `paddle1_y` e `paddle2_y`
 
-- La **velocità della pallina** può essere cambiata, così come la velocità dei paddle `VELOCITA_PADDLE`
+- La **velocità della pallina** può essere cambiata, così come la velocità dei paddle `velocita_paddle`
 
 - La **dimensione della pallina** può essere resa più grande o più piccola, andando a modificare `grandezza_pallina`
 

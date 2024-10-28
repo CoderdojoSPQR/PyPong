@@ -55,8 +55,8 @@ dx_pallina, dy_pallina = 5, 5
 grandezza_pallina = 10
 
 paddle1_y, paddle2_y = A_SCHERMO // 2, A_SCHERMO // 2
-PADDLE_LARGHEZZA, PADDLE_ALTEZZA = 10, 100
-VELOCITA_PADDLE = 7
+paddle_larghezza, paddle_altezza = 10, 100
+velocita_paddle = 7
 ```
 
 Stiamo dicendo al computer di costruire una **pallina al centro dello schermo**.
@@ -69,9 +69,9 @@ Andando verso la fine, sotto la riga `schermo.fill(0, 0, 0)`, scriviamo:
 ```python
 pygame.draw.circle(schermo, BIANCO, (x_pallina, y_pallina), grandezza_pallina)
 
-pygame.draw.rect(schermo, BIANCO, (0, paddle1_y, PADDLE_LARGHEZZA, PADDLE_ALTEZZA))
+pygame.draw.rect(schermo, BIANCO, (0, paddle1_y, paddle_larghezza, paddle_altezza))
 
-pygame.draw.rect(schermo, BIANCO, (L_SCHERMO - PADDLE_LARGHEZZA, paddle2_y, PADDLE_LARGHEZZA, PADDLE_ALTEZZA))
+pygame.draw.rect(schermo, BIANCO, (L_SCHERMO - paddle_larghezza, paddle2_y, paddle_larghezza, paddle_altezza))
 ```
 
 Se tutto è andato per il verso giusto, premiamo **F5** per eseguire il codice e vedere la nostra pallina e i paddle!
@@ -88,9 +88,9 @@ Sotto la riga `# Controlli paddle` scriviamo:
 ```python
 keys = pygame.key.get_pressed()
 if keys[pygame.K_w] and paddle1_y > 0:
-    paddle1_y -= VELOCITA_PADDLE
-if keys[pygame.K_s] and paddle1_y < A_SCHERMO - PADDLE_ALTEZZA:
-    paddle1_y += VELOCITA_PADDLE
+    paddle1_y -= velocita_paddle
+if keys[pygame.K_s] and paddle1_y < A_SCHERMO - paddle_altezza:
+    paddle1_y += velocita_paddle
 ```
 
 Se premiamo **F5** e proviamo a premere i tasti **W** e **S**, vedremo il nostro **paddle 1** muoversi su e giù!
@@ -98,9 +98,9 @@ Se premiamo **F5** e proviamo a premere i tasti **W** e **S**, vedremo il nostro
 Continuiamo scrivendo il codice per il giocatore 2:
 ```python
     if keys[pygame.K_UP] and paddle2_y > 0:
-        paddle2_y -= VELOCITA_PADDLE
-    if keys[pygame.K_DOWN] and paddle2_y < A_SCHERMO - PADDLE_ALTEZZA:
-        paddle2_y += VELOCITA_PADDLE
+        paddle2_y -= velocita_paddle
+    if keys[pygame.K_DOWN] and paddle2_y < A_SCHERMO - paddle_altezza:
+        paddle2_y += velocita_paddle
 ```
 
 Indovinate un po'? Se premiamo **F5** e proviamo a premere i tasti **freccia su** e **freccia giù**, vedremo anche il nostro **paddle 2** muoversi su e giù!
@@ -143,18 +143,18 @@ Manca il codice per **collidere** e **rimbalzare** la pallina sui paddle!
 
 Sotto la riga `# Collisione con il paddle sinistro` scriviamo:
 ```python
-if (x_pallina - grandezza_pallina <= PADDLE_LARGHEZZA and
-    paddle1_y < y_pallina < paddle1_y + PADDLE_ALTEZZA):
+if (x_pallina - grandezza_pallina <= paddle_larghezza and
+    paddle1_y < y_pallina < paddle1_y + paddle_altezza):
     dx_pallina *= -1
-    x_pallina = PADDLE_LARGHEZZA + grandezza_pallina 
+    x_pallina = paddle_larghezza + grandezza_pallina 
 ```
 
 Sotto la riga `# Collisione con il paddle destro` scriviamo:
 ```python
-if (x_pallina + grandezza_pallina >= L_SCHERMO - PADDLE_LARGHEZZA and
-    paddle2_y < y_pallina < paddle2_y + PADDLE_ALTEZZA):
+if (x_pallina + grandezza_pallina >= L_SCHERMO - paddle_larghezza and
+    paddle2_y < y_pallina < paddle2_y + paddle_altezza):
     dx_pallina *= -1
-    x_pallina = L_SCHERMO - PADDLE_LARGHEZZA - grandezza_pallina 
+    x_pallina = L_SCHERMO - paddle_larghezza - grandezza_pallina 
 ```
 
 Facciamo cambiare direzione alla pallina quando colpisce un paddle, facendola rimbalzare!
@@ -193,19 +193,21 @@ che saranno i nostri **punti iniziali**.
 
 Dobbiamo riscrivere la funzione di reset della pallina: infatti dobbiamo **aggiornare il punteggio** quando la pallina esce dai lati dello schermo.
 
-Sotto la riga `# Reset della pallina se va oltre i bordi` scriviamo:
+Sotto la riga `# Reset della pallina se va oltre i bordi` aggiungiamo:
 ```python
-if x_pallina < 0 or x_pallina > L_SCHERMO:
+if x_pallina < 0 or x_pallina > L_SCHERMO:    
+    x_pallina, y_pallina = L_SCHERMO // 2, A_SCHERMO // 2
+    dx_pallina = -dx_pallina
 
-    if x_pallina < 0:  # Punto per il giocatore di destra
+    # Punto per il giocatore di destra
+    if x_pallina < 0:
         punti_giocatore_2 += 1
-        x_pallina, y_pallina = L_SCHERMO // 2, A_SCHERMO // 2
-        dx_pallina = -dx_pallina
-
-    if x_pallina > L_SCHERMO:  # Punto per il giocatore di sinistra
+        
+    # Punto per il giocatore di sinistra
+    if x_pallina > L_SCHERMO:
         punti_giocatore_1 += 1
-        x_pallina, y_pallina = L_SCHERMO // 2, A_SCHERMO // 2
-        dx_pallina = -dx_pallina
+
+
 ```
 
 Adesso manca solo una cosa: **disegnare il punteggio**!
