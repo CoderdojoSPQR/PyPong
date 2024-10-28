@@ -88,9 +88,9 @@ Sotto la riga `# Controlli paddle` scriviamo:
 ```python
 keys = pygame.key.get_pressed()
 if keys[pygame.K_w] and paddle1_y > 0:
-    paddle1_y -= velocita_paddle
+    paddle1_y = paddle1_y - velocita_paddle
 if keys[pygame.K_s] and paddle1_y < A_SCHERMO - paddle_altezza:
-    paddle1_y += velocita_paddle
+    paddle1_y = paddle1_y + velocita_paddle
 ```
 
 Se premiamo **F5** e proviamo a premere i tasti **W** e **S**, vedremo il nostro **paddle 1** muoversi su e giù!
@@ -98,9 +98,9 @@ Se premiamo **F5** e proviamo a premere i tasti **W** e **S**, vedremo il nostro
 Continuiamo scrivendo il codice per il giocatore 2:
 ```python
     if keys[pygame.K_UP] and paddle2_y > 0:
-        paddle2_y -= velocita_paddle
+        paddle2_y = paddle2_y - velocita_paddle
     if keys[pygame.K_DOWN] and paddle2_y < A_SCHERMO - paddle_altezza:
-        paddle2_y += velocita_paddle
+        paddle2_y = paddle2_y + velocita_paddle
 ```
 
 Indovinate un po'? Se premiamo **F5** e proviamo a premere i tasti **freccia su** e **freccia giù**, vedremo anche il nostro **paddle 2** muoversi su e giù!
@@ -109,8 +109,8 @@ Indovinate un po'? Se premiamo **F5** e proviamo a premere i tasti **freccia su*
 ### Muoviamo la pallina
 Sotto la riga `# Movimento pallina` scriviamo:
 ```python
-x_pallina += dx_pallina
-y_pallina += dy_pallina
+x_pallina = x_pallina + dx_pallina
+y_pallina = y_pallina + dy_pallina
 ```
 
 Stiamo dicendo alla pallina di **muoversi** in base alla **sua velocità**.
@@ -130,7 +130,7 @@ Capiamo innanzitutto come gestire i bordi dello schermo: vorremmo che la pallina
 Sotto la riga `# Collisione con il bordo superiore e inferiore` scriviamo:
 ```python
 if y_pallina <= grandezza_pallina or y_pallina >= A_SCHERMO - grandezza_pallina:
-        dy_pallina *= -1
+        dy_pallina = dy_pallina * -1
 ```
 
 Premendo **F5**, noteremo che la pallina rimbalza quando colpisce il **bordo superiore** o il **bordo inferiore**!
@@ -145,7 +145,7 @@ Sotto la riga `# Collisione con il paddle sinistro` scriviamo:
 ```python
 if (x_pallina - grandezza_pallina <= paddle_larghezza and
     paddle1_y < y_pallina < paddle1_y + paddle_altezza):
-    dx_pallina *= -1
+    dx_pallina = dx_pallina * -1
     x_pallina = paddle_larghezza + grandezza_pallina 
 ```
 
@@ -153,7 +153,7 @@ Sotto la riga `# Collisione con il paddle destro` scriviamo:
 ```python
 if (x_pallina + grandezza_pallina >= L_SCHERMO - paddle_larghezza and
     paddle2_y < y_pallina < paddle2_y + paddle_altezza):
-    dx_pallina *= -1
+    dx_pallina = dx_pallina * -1
     x_pallina = L_SCHERMO - paddle_larghezza - grandezza_pallina 
 ```
 
@@ -201,11 +201,11 @@ if x_pallina < 0 or x_pallina > L_SCHERMO:
 
     # Punto per il giocatore di destra
     if x_pallina < 0:
-        punti_giocatore_2 += 1
+        punti_giocatore_2 = punti_giocatore_2 + 1
         
     # Punto per il giocatore di sinistra
     if x_pallina > L_SCHERMO:
-        punti_giocatore_1 += 1
+        punti_giocatore_1 = punti_giocatore_1 + 1
 
 
 ```

@@ -34,7 +34,9 @@ I ragazzi iniziano con il template base, gia scaricato sul desktop, che contiene
 - La struttura del ciclo principale (`while True`) in `pygame`.
 - Una finestra vuota su cui costruire il gioco.
 - Dei commenti e dei puntini di sospensione per aiutare a capire dove bisogna scrivere il codice.
-  
+
+Introduciamo anche le variabili: sono delle piccole scatole in cui è possibile mettere qualcosa, ad esempio dei numeri, delle lettere eccetera.
+
 ### Cosa devono fare i ragazzi
 - Far apparire una semplice pallina (un cerchio) al centro
 - Far apparire i paddle (giocatori)

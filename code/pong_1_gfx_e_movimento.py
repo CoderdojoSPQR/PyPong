@@ -29,17 +29,17 @@ while True:
     # Controlli paddle
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w] and paddle1_y > 0:
-        paddle1_y -= velocita_paddle
+        paddle1_y = paddle1_y - velocita_paddle
     if keys[pygame.K_s] and paddle1_y < A_SCHERMO - paddle_altezza:
-        paddle1_y += velocita_paddle
+        paddle1_y = paddle1_y + velocita_paddle
     if keys[pygame.K_UP] and paddle2_y > 0:
-        paddle2_y -= velocita_paddle
+        paddle2_y = paddle2_y - velocita_paddle
     if keys[pygame.K_DOWN] and paddle2_y < A_SCHERMO - paddle_altezza:
-        paddle2_y += velocita_paddle
+        paddle2_y = paddle2_y + velocita_paddle
 
     # Movimento della pallina
-    x_pallina += dx_pallina
-    y_pallina += dy_pallina
+    x_pallina = x_pallina + dx_pallina
+    y_pallina = y_pallina + dy_pallina
 
     # COLLISIONI
     # =======
