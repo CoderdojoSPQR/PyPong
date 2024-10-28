@@ -14,7 +14,7 @@ fi
 
 # Installa Pygame
 echo "Installazione di Pygame in corso..."
-python3.10 -m pip install ./installers/pygame-2.1.2-cp310-cp310-macosx_10_9_x86_64.whl --no-index --find-links=.
+python3.10 -m pip install ./installers/pygame-2.6.1-cp310-cp310-macosx_10_9_x86_64.whl --no-index --find-links=.
 echo "Installazione di Pygame completata!"
 
 read -p "Premi Invio per terminare."
