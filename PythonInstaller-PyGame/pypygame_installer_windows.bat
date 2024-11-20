@@ -37,7 +37,7 @@ goto :End
 
 :InstallWheel
 REM Install the Pygame wheel using the default Python installation
-python -m pip install installers/pygame-2.6.1-cp310-cp310-win_amd64.whl --no-index --find-links=.
+pip install installers/pygame-2.6.1-cp310-cp310-win_amd64.whl --no-index --find-links=.
 echo Installazione completata.
 goto :End
 
